@@ -1,0 +1,24 @@
+{
+    "name": "servidorcomensal",
+    "version": "1.0.0",
+    "description": "un servidor para podr ejecutar una aplicacion",
+    "main": "index.js",
+    "scripts": {
+        "start": "node .",
+        "dev": "nodemon ."
+    },
+    "author": "isai-trejo-duran",
+    "license": "MIT",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cloudinary": "^1.23.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-fileupload": "^1.2.0",
+        "express-validator": "^6.7.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.10.17",
+        "nodemon": "^2.0.6"
+    }
+}
