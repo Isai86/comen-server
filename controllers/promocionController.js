@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator');
 const { cloudinary } = require('../utils/cloudinary-upload-image');
 
 
-exports.crearPromocion = async(req, res) => {
+/* exports.crearPromocion = async(req, res) => {
 
     //Revisar si existen errores
     const errores = validationResult(req);
@@ -22,9 +22,65 @@ exports.crearPromocion = async(req, res) => {
         promocion.creador = req.lugar.id;
 
 
-        //Se guarda el producto
+        //Se guarda el productov
         promocion.save();
-        res.json(promocion)
+        res.status(200).json({ ok: true, promocion })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('Hubo un error');
+    }
+
+
+} */
+exports.crearPromocion = async(req, res) => {
+
+
+    //Revisar si existen errores
+    const errores = validationResult(req);
+    if (!errores.isEmpty()) {
+        return res.status(404).json({ errores: errores.array() })
+    }
+
+    try {
+        const { titulo, descripcion, precio } = req.body;
+
+
+        if (!titulo || !descripcion || !precio) {
+            res.status(500).json({ ok: false, msg: 'Titulo, descripción y precio son obligatorios' })
+        }
+
+        console.log(req.files)
+        if (!req.files || Object.keys(req.files).length === 0)
+            return res.status(400).json({ msg: 'No hay ningun archivo para subir.' })
+        const avatar = req.files.avatar;
+        if (avatar.size > 1024 * 1024) return res.status(400).json({ msg: 'El archivo es muy grande' })
+
+        if (avatar.mimetype !== 'image/jpeg' && avatar.mimetype !== 'image/png')
+            return res.status(400).json({ msg: 'El tipo de formato de este archivo no es compatible(solo png o jpg)' })
+
+        cloudinary.v2.uploader.upload(avatar.tempFilePath, { folder: "promocion" }, async(err, result) => {
+            if (err) throw err;
+
+            //Crear un producto 
+            const promocion = new Promocion({
+                titulo: req.body.titulo,
+                descripcion: req.body.descripcion,
+                precio: req.body.precio,
+                avatar: result.secure_url
+            });
+
+            //Guardar el creador via JWT
+            promocion.creador = req.lugar.id;
+
+
+            //Se guarda el productov
+            await promocion.save();
+            res.status(200).json({ ok: true, promocion })
+        })
+
+
+
 
     } catch (error) {
         console.log(error)
@@ -36,8 +92,19 @@ exports.crearPromocion = async(req, res) => {
 
 //Obtiene todos los productos del usuario actual
 exports.obtenerPromociones = async(req, res) => {
+        try {
+            const promocion = await Promocion.find({ creador: req.lugar.id });
+            res.json({ promocion });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Hubo un error');
+        }
+    }
+    //Obtiene productos del usuario para la pagina principal
+exports.obtenerPromocionesPagina = async(req, res) => {
+
     try {
-        const promocion = await Promocion.find({ creador: req.lugar.id });
+        const promocion = await Promocion.find({ creador: req.params.id });
         res.json({ promocion });
     } catch (error) {
         console.log(error);
@@ -57,7 +124,7 @@ exports.actualizarPromocion = async(req, res) => {
     //Extraer la información del proyecto
     const { titulo, descripcion, precio, avatar } = req.body;
     const nuevaPromocion = {};
-    if (precio, descripcion, titulo) {
+    if (precio, descripcion, titulo, avatar) {
         nuevaPromocion.titulo = titulo;
         nuevaPromocion.descripcion = descripcion;
         nuevaPromocion.precio = precio;

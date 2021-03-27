@@ -7,23 +7,18 @@ const SlideSchema = Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
     },
     avatar: {
         type: String,
     },
 
-    descripción: {
+    descripcion: {
         type: String
     },
     creador: {
         type: Schema.Types.ObjectId,
         ref: 'Lugar'
     },
-    creado: {
-        type: Date,
-        default: Date.now()
-    }
 
 });
 

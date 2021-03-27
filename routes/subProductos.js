@@ -13,7 +13,10 @@ router.post('/', auth, [
 ], sPController.crearunsp);
 
 //obtener los subProductos por producto
-router.get('/', auth, sPController.obtenersp);
+router.post('/sp', auth, sPController.obtenersp);
+
+//obtener los subProductos por producto para el menú
+router.post('/producto', sPController.obtenerspPage);
 
 //Actualizar SubProducto
 router.put('/:id', auth, [
@@ -22,5 +25,8 @@ router.put('/:id', auth, [
 
 //Eliminar un SubProducto
 router.delete('/:id', auth, sPController.eliminarsp)
+
+//Subir imagen
+router.post('/avatar/:id', auth, sPController.uploadFotoSP)
 
 module.exports = router;

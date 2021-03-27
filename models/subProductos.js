@@ -7,14 +7,13 @@ const SubProductosSchema = Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
     },
     descripcion: {
         type: String,
     },
     precio: {
         type: String,
-        required: true,
+        /* Number */
     },
     imagen: {
         type: String,
@@ -23,10 +22,17 @@ const SubProductosSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Productos'
     },
+    creador: {
+        type: Schema.Types.ObjectId,
+        ref: 'Lugar'
+    },
+    avatar: {
+        type: String,
+    },
     creado: {
         type: Date,
         default: Date.now()
-    }
+    },
 
 });
 

@@ -5,11 +5,6 @@ const UserSchema = Schema({
         type: String,
         required: true,
     },
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
     email: {
         type: String,
         required: true,
@@ -31,6 +26,11 @@ const UserSchema = Schema({
     active: {
         type: Boolean,
         default: false
+    },
+
+    role: {
+        type: String,
+        default: "User"
     },
 });
 UserSchema.method('toJSON', function() {

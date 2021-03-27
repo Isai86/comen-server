@@ -19,7 +19,13 @@ const PromoSchema = Schema({
 
     precio: {
         type: String,
+        /* Number */
     },
+    active: {
+        type: Boolean,
+        default: false
+    },
+
     creador: {
         type: Schema.Types.ObjectId,
         ref: 'Lugar'

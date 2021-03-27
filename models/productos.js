@@ -7,7 +7,6 @@ const ProductosSchema = Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
     },
     avatar: {
         type: String,

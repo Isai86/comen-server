@@ -10,15 +10,9 @@ exports.crearProducto = async(req, res) => {
         return res.status(404).json({ errores: errores.array() })
     }
 
-    //extraer email y password
-    const { nombre } = req.body;
+
 
     try {
-        // let producto = await Productos.findOne({ nombre });
-
-        /* if (producto) {
-            return res.status(400).json({ msg: 'El producto ya existe' });
-        } */
 
 
         //Crear un producto 
@@ -30,7 +24,7 @@ exports.crearProducto = async(req, res) => {
 
         //Se guarda el producto
         producto.save();
-        res.json(producto)
+        res.status(200).json({ ok: true, producto })
 
     } catch (error) {
         console.log(error)
@@ -43,6 +37,17 @@ exports.crearProducto = async(req, res) => {
 exports.obtenerProductos = async(req, res) => {
     try {
         const productos = await Productos.find({ creador: req.lugar.id });
+        res.json({ productos });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
+//Obtiene todos los productos del usuario actualpara el menú
+exports.obtenerProductosPage = async(req, res) => {
+    try {
+        const productos = await Productos.find({ creador: req.params.id });
         res.json({ productos });
     } catch (error) {
         console.log(error);

@@ -14,6 +14,9 @@ router.post('/', auth, [
 //Obtener todos los productos
 router.get('/', auth, promocionController.obtenerPromociones)
 
+//Obtener todos los productos para la pagina principal
+router.get('/:id', promocionController.obtenerPromocionesPagina)
+
 //Actualizar producto via ID
 router.put('/:id', auth, [
     check('titulo', 'El titulo del producto es obligatorio').not().isEmpty(),

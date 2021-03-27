@@ -4,7 +4,7 @@
     "description": "un servidor para podr ejecutar una aplicacion",
     "main": "index.js",
     "scripts": {
-        "start": "node .",
+        "start": "node app",
         "dev": "nodemon ."
     },
     "author": "isai-trejo-duran",
@@ -17,8 +17,12 @@
         "express": "^4.17.1",
         "express-fileupload": "^1.2.0",
         "express-validator": "^6.7.0",
+        "googleapis": "^67.0.0",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.10.17",
-        "nodemon": "^2.0.6"
+        "nodemailer": "^6.4.17",
+        "nodemon": "^2.0.6",
+        "socket.io": "2.3.0",
+        "stripe": "^8.135.0"
     }
 }

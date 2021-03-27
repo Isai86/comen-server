@@ -10,6 +10,11 @@ router.post('/', [
     check('password', 'El password debe de ser minimo de 6 caracteres').isLength({ min: 6 })
 ], authController.autenticar);
 
+router.post('/user', [
+    check('email', 'Agrega un Email válido').isEmail(),
+    check('password', 'El password debe de ser minimo de 6 caracteres').isLength({ min: 6 })
+], authController.autenticarUser);
+
 
 
 module.exports = router;

@@ -13,6 +13,9 @@ router.post('/', auth, [
 //Obtener todos los productos
 router.get('/', auth, productoController.obtenerProductos)
 
+//Obtener todos los productos para la pagina
+router.get('/:id', productoController.obtenerProductosPage)
+
 //Actualizar producto via ID
 router.put('/:id', auth, [
     check('nombre', 'El nombre del producto es obligatorio').not().isEmpty()
