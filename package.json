@@ -4,8 +4,9 @@
     "description": "un servidor para podr ejecutar una aplicacion",
     "main": "index.js",
     "scripts": {
-        "start": "app",
+        "start": "index.js",
         "dev": "nodemon ."
+
     },
     "author": "isai-trejo-duran",
     "license": "MIT",
@@ -24,5 +25,8 @@
         "nodemon": "^2.0.6",
         "socket.io": "2.3.0",
         "stripe": "^8.135.0"
+    },
+    "devDependencies": {
+        "dev": "nodemon ."
     }
 }
