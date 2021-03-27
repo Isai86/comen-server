@@ -4,7 +4,7 @@
     "description": "un servidor para podr ejecutar una aplicacion",
     "main": "index.js",
     "scripts": {
-        "start": "node app",
+        "start": "app",
         "dev": "nodemon ."
     },
     "author": "isai-trejo-duran",
